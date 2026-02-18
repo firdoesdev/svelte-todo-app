@@ -1,0 +1,575 @@
+$ svelte-kit sync && svelte-check --tsconfig ./tsconfig.json
+Loading svelte-check in workspace: /Users/mbex71/Documents/Research/my-svelte-app
+Getting Svelte diagnostics...
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/create-todo-form.svelte:14:9
+Error: Object literal may only specify known properties, and 'mutationFn' does not exist in type 'Accessor<CreateMutationOptions<unknown, Error, void, unknown>>'. (ts)
+    const mutation = createMutation({
+        mutationFn: async (values: { title: string; description?: string }) => {
+            const res = await fetch('/api/todos', {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/create-todo-form.svelte:28:19
+Error: Parameter 'err' implicitly has an 'any' type. (ts)
+        },
+        onError: (err) => {
+            toast.error(err.message);
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/create-todo-form.svelte:34:3
+Error: Object literal may only specify known properties, and 'validatorAdapter' does not exist in type '() => FormOptions<unknown, FormValidateOrFn<unknown> | undefined, FormValidateOrFn<unknown> | undefined, FormAsyncValidateOrFn<unknown> | undefined, ... 7 more ..., unknown>'. (ts)
+	const form = createForm({
+		validatorAdapter: zodValidator(),
+        validators: {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/create-todo-form.svelte:38:22
+Error: Binding element 'value' implicitly has an 'any' type. (ts)
+        },
+		onSubmit: async ({ value }) => {
+            $mutation.mutate(value);
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/create-todo-form.svelte:46:6
+Error: Argument of type 'Promise<void>' is not assignable to parameter of type '__sveltets_2_SvelteActionReturnType'. (ts)
+	method="POST"
+	use:form.handleSubmit
+	class="flex flex-col gap-4 max-w-md border p-4 rounded-lg bg-card text-card-foreground shadow-sm"
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/create-todo-form.svelte:39:13
+Error: Cannot use 'mutation' as a store. 'mutation' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateMutationResult<unknown, Error, void, unknown>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'Override<MutationObserverIdleResult<unknown, Error, void, unknown>, { mutate: CreateMutateFunction<unknown, Error, void, unknown>; }> & { ...; }' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateMutationResult<unknown, Error, void, unknown>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Type 'Override<MutationObserverIdleResult<unknown, Error, void, unknown>, { mutate: CreateMutateFunction<unknown, Error, void, unknown>; }> & { ...; }' is not assignable to type 'SvelteStore<any> | null | undefined'. (ts)
+		onSubmit: async ({ value }) => {
+            $mutation.mutate(value);
+		}
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/edit-todo-form.svelte:39:20
+Warn: This reference only captures the initial value of `todo`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally (svelte)
+        defaultValues: {
+            title: todo.title,
+            description: todo.description || '',
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/edit-todo-form.svelte:40:26
+Warn: This reference only captures the initial value of `todo`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally (svelte)
+            title: todo.title,
+            description: todo.description || '',
+            completed: todo.completed
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/edit-todo-form.svelte:41:24
+Warn: This reference only captures the initial value of `todo`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally (svelte)
+            description: todo.description || '',
+            completed: todo.completed
+        },
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/edit-todo-form.svelte:17:9
+Error: Object literal may only specify known properties, and 'mutationFn' does not exist in type 'Accessor<CreateMutationOptions<unknown, Error, void, unknown>>'. (ts)
+    const mutation = createMutation({
+        mutationFn: async (values: any) => {
+            const res = await fetch(`/api/todos/${todo.id}`, {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/edit-todo-form.svelte:32:19
+Error: Parameter 'err' implicitly has an 'any' type. (ts)
+        },
+        onError: (err) => {
+            toast.error(err.message);
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/edit-todo-form.svelte:38:9
+Error: Object literal may only specify known properties, and 'defaultValues' does not exist in type '() => FormOptions<unknown, FormValidateOrFn<unknown> | undefined, FormValidateOrFn<unknown> | undefined, FormAsyncValidateOrFn<unknown> | undefined, ... 7 more ..., unknown>'. (ts)
+	const form = createForm({
+        defaultValues: {
+            title: todo.title,
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/edit-todo-form.svelte:47:22
+Error: Binding element 'value' implicitly has an 'any' type. (ts)
+        },
+		onSubmit: async ({ value }) => {
+            $mutation.mutate(value);
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/edit-todo-form.svelte:55:6
+Error: Argument of type 'Promise<void>' is not assignable to parameter of type '__sveltets_2_SvelteActionReturnType'. (ts)
+	method="POST"
+	use:form.handleSubmit
+	class="flex flex-col gap-4 max-w-md border p-4 rounded-lg bg-card text-card-foreground shadow-sm"
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/edit-todo-form.svelte:98:25
+Error: Type 'unknown' is not assignable to type 'boolean | undefined'. (ts)
+                        id="completed"
+                        checked={state.value}
+                        onCheckedChange={(v) => handleChange(!!v)}
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/edit-todo-form.svelte:48:13
+Error: Cannot use 'mutation' as a store. 'mutation' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateMutationResult<unknown, Error, void, unknown>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'Override<MutationObserverIdleResult<unknown, Error, void, unknown>, { mutate: CreateMutateFunction<unknown, Error, void, unknown>; }> & { ...; }' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateMutationResult<unknown, Error, void, unknown>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Type 'Override<MutationObserverIdleResult<unknown, Error, void, unknown>, { mutate: CreateMutateFunction<unknown, Error, void, unknown>; }> & { ...; }' is not assignable to type 'SvelteStore<any> | null | undefined'. (ts)
+		onSubmit: async ({ value }) => {
+            $mutation.mutate(value);
+		}
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/todo-list.svelte:64:21
+Warn: Quoted attributes on components and custom elements will be stringified in a future version of Svelte. If this isn't what you want, remove the quotes
+https://svelte.dev/e/attribute_quoted (svelte)
+                    onCheckedChange={(checked) => handleToggle(todo.id, !!checked)}
+                    id="{todo.id}"
+                />
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/todo-list.svelte:12:9
+Error: Object literal may only specify known properties, and 'mutationFn' does not exist in type 'Accessor<CreateMutationOptions<unknown, Error, void, unknown>>'. (ts)
+    const toggleMutation = createMutation({
+        mutationFn: async ({ id, completed }: { id: string, completed: boolean }) => {
+            const res = await fetch(`/api/todos/${id}`, {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/todo-list.svelte:24:19
+Error: Parameter 'err' implicitly has an 'any' type. (ts)
+        },
+        onError: (err) => {
+            toast.error(err.message);
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/todo-list.svelte:30:9
+Error: Object literal may only specify known properties, and 'mutationFn' does not exist in type 'Accessor<CreateMutationOptions<unknown, Error, void, unknown>>'. (ts)
+    const deleteMutation = createMutation({
+        mutationFn: async (id: string) => {
+            const res = await fetch(`/api/todos/${id}`, {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/todo-list.svelte:41:19
+Error: Parameter 'err' implicitly has an 'any' type. (ts)
+        },
+        onError: (err) => {
+            toast.error(err.message);
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/todo-list.svelte:47:9
+Error: Cannot use 'toggleMutation' as a store. 'toggleMutation' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateMutationResult<unknown, Error, void, unknown>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'Override<MutationObserverIdleResult<unknown, Error, void, unknown>, { mutate: CreateMutateFunction<unknown, Error, void, unknown>; }> & { ...; }' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateMutationResult<unknown, Error, void, unknown>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Type 'Override<MutationObserverIdleResult<unknown, Error, void, unknown>, { mutate: CreateMutateFunction<unknown, Error, void, unknown>; }> & { ...; }' is not assignable to type 'SvelteStore<any> | null | undefined'. (ts)
+    function handleToggle(id: string, completed: boolean) {
+        $toggleMutation.mutate({ id, completed });
+    }
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/lib/components/todo/todo-list.svelte:52:13
+Error: Cannot use 'deleteMutation' as a store. 'deleteMutation' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateMutationResult<unknown, Error, void, unknown>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'Override<MutationObserverIdleResult<unknown, Error, void, unknown>, { mutate: CreateMutateFunction<unknown, Error, void, unknown>; }> & { ...; }' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateMutationResult<unknown, Error, void, unknown>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Type 'Override<MutationObserverIdleResult<unknown, Error, void, unknown>, { mutate: CreateMutateFunction<unknown, Error, void, unknown>; }> & { ...; }' is not assignable to type 'SvelteStore<any> | null | undefined'. (ts)
+        if (confirm('Are you sure?')) {
+            $deleteMutation.mutate(id);
+        }
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/+layout.svelte:11:4
+Error: Object literal may only specify known properties, and 'callbackURL' does not exist in type 'Prettify<{ query?: Record<string, any> | undefined; fetchOptions?: ClientFetchOption<never, Partial<Record<string, any>> & Record<string, any>, Record<string, any> | undefined> | undefined; }>'. (ts)
+		await authClient.signOut({
+			callbackURL: "/login"
+		});
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:29:23
+Warn: This reference only captures the initial value of `debouncedSearch`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally (svelte)
+	const query = createQuery({
+		queryKey: ['todos', debouncedSearch, status, sort, page],
+		queryFn: async () => {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:29:40
+Warn: This reference only captures the initial value of `status`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally (svelte)
+	const query = createQuery({
+		queryKey: ['todos', debouncedSearch, status, sort, page],
+		queryFn: async () => {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:29:48
+Warn: This reference only captures the initial value of `sort`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally (svelte)
+	const query = createQuery({
+		queryKey: ['todos', debouncedSearch, status, sort, page],
+		queryFn: async () => {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:29:54
+Warn: This reference only captures the initial value of `page`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally (svelte)
+	const query = createQuery({
+		queryKey: ['todos', debouncedSearch, status, sort, page],
+		queryFn: async () => {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:7:83
+Error: Cannot find module '$lib/components/ui/select' or its corresponding type declarations. (ts)
+	import { Button } from '$lib/components/ui/button';
+    import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "$lib/components/ui/select";
+    import ChevronLeft from "lucide-svelte/icons/chevron-left";
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:18:16
+Error: Cannot find name 'Timer'. (ts)
+    let debouncedSearch = $state('');
+    let timer: Timer;
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:29:3
+Error: No overload matches this call.
+  Overload 1 of 3, '(options: Accessor<UndefinedInitialDataOptions<unknown, Error, unknown, readonly unknown[]>>, queryClient?: Accessor<QueryClient> | undefined): CreateQueryResult<...>', gave the following error.
+    Object literal may only specify known properties, and 'queryKey' does not exist in type 'Accessor<UndefinedInitialDataOptions<unknown, Error, unknown, readonly unknown[]>>'.
+  Overload 2 of 3, '(options: Accessor<DefinedInitialDataOptions<unknown, Error, unknown, readonly unknown[]>>, queryClient?: Accessor<QueryClient> | undefined): DefinedCreateQueryResult<...>', gave the following error.
+    Object literal may only specify known properties, and 'queryKey' does not exist in type 'Accessor<DefinedInitialDataOptions<unknown, Error, unknown, readonly unknown[]>>'.
+  Overload 3 of 3, '(options: Accessor<CreateQueryOptions<unknown, Error, unknown, readonly unknown[]>>, queryClient?: Accessor<QueryClient> | undefined): CreateQueryResult<...>', gave the following error.
+    Object literal may only specify known properties, and 'queryKey' does not exist in type 'Accessor<CreateQueryOptions<unknown, Error, unknown, readonly unknown[]>>'. (ts)
+	const query = createQuery({
+		queryKey: ['todos', debouncedSearch, status, sort, page],
+		queryFn: async () => {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:69:67
+Error: Parameter 'v' implicitly has an 'any' type. (ts)
+        
+        <Select type="single" bind:value={status} onValueChange={(v) => { status = v; page = 1; }}>
+            <SelectTrigger class="w-[140px]">
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:80:65
+Error: Parameter 'v' implicitly has an 'any' type. (ts)
+
+        <Select type="single" bind:value={sort} onValueChange={(v) => { sort = v; page = 1; }}>
+            <SelectTrigger class="w-[140px]">
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:46:13
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+    function handleNextPage() {
+        if ($query.data?.meta.page < $query.data?.meta.totalPages) {
+            page++;
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:46:38
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+    function handleNextPage() {
+        if ($query.data?.meta.page < $query.data?.meta.totalPages) {
+            page++;
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:91:7
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+
+	{#if $query.isLoading}
+		<p>Loading todos...</p>
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:93:12
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+		<p>Loading todos...</p>
+	{:else if $query.isError}
+		<p class="text-destructive">Error: {$query.error.message}</p>
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:94:39
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+	{:else if $query.isError}
+		<p class="text-destructive">Error: {$query.error.message}</p>
+	{:else if $query.data}
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:95:12
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+		<p class="text-destructive">Error: {$query.error.message}</p>
+	{:else if $query.data}
+		<TodoList todos={$query.data.data} />
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:96:20
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+	{:else if $query.data}
+		<TodoList todos={$query.data.data} />
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:100:23
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+            <p class="text-sm text-muted-foreground">
+                Page {$query.data.meta.page} of {$query.data.meta.totalPages || 1}
+            </p>
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:100:50
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+            <p class="text-sm text-muted-foreground">
+                Page {$query.data.meta.page} of {$query.data.meta.totalPages || 1}
+            </p>
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:106:92
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+                </Button>
+                <Button variant="outline" size="icon" onclick={handleNextPage} disabled={!($query.data.meta.page < $query.data.meta.totalPages)}>
+                    <ChevronRight class="h-4 w-4" />
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/+page.svelte:106:116
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateQueryResult<unknown, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'QueryObserverRefetchErrorResult<unknown, Error>' but required in type 'SvelteStore<any>'. (ts)
+                </Button>
+                <Button variant="outline" size="icon" onclick={handleNextPage} disabled={!($query.data.meta.page < $query.data.meta.totalPages)}>
+                    <ChevronRight class="h-4 w-4" />
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:7:3
+Error: Object literal may only specify known properties, and 'queryKey' does not exist in type 'Accessor<CreateInfiniteQueryOptions<unknown, Error, InfiniteData<unknown, unknown>, readonly unknown[], unknown>>'. (ts)
+	const query = createInfiniteQuery({
+		queryKey: ['todos', 'infinite'],
+		queryFn: async ({ pageParam = 1 }) => {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:18:28
+Error: Parameter 'lastPage' implicitly has an 'any' type. (ts)
+        initialPageParam: 1,
+        getNextPageParam: (lastPage) => {
+            if (lastPage.meta.page < lastPage.meta.totalPages) {
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:56:54
+Error: Parameter 'page' implicitly has an 'any' type. (ts)
+	{:else if $query.data}
+        {@const allTodos = $query.data.pages.flatMap(page => page.data)}
+		<TodoList todos={allTodos} />
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:30:46
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'. (ts)
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && $query.hasNextPage && !$query.isFetchingNextPage) {
+                $query.fetchNextPage();
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:30:69
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'. (ts)
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && $query.hasNextPage && !$query.isFetchingNextPage) {
+                $query.fetchNextPage();
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:31:17
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'. (ts)
+            if (entries[0].isIntersecting && $query.hasNextPage && !$query.isFetchingNextPage) {
+                $query.fetchNextPage();
+            }
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:51:7
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'. (ts)
+
+	{#if $query.isLoading}
+		<p>Loading todos...</p>
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:53:12
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'. (ts)
+		<p>Loading todos...</p>
+	{:else if $query.isError}
+		<p class="text-destructive">Error: {$query.error.message}</p>
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:54:39
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'. (ts)
+	{:else if $query.isError}
+		<p class="text-destructive">Error: {$query.error.message}</p>
+	{:else if $query.data}
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:55:12
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'. (ts)
+		<p class="text-destructive">Error: {$query.error.message}</p>
+	{:else if $query.data}
+        {@const allTodos = $query.data.pages.flatMap(page => page.data)}
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:56:28
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'. (ts)
+	{:else if $query.data}
+        {@const allTodos = $query.data.pages.flatMap(page => page.data)}
+		<TodoList todos={allTodos} />
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:60:18
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'. (ts)
+        <div bind:this={loadMoreTrigger} class="h-10 flex items-center justify-center p-4">
+            {#if $query.isFetchingNextPage}
+                <span class="text-muted-foreground">Loading more...</span>
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/dashboard/todos/infinite/+page.svelte:62:24
+Error: Cannot use 'query' as a store. 'query' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any>'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type 'CreateInfiniteQueryResult<InfiniteData<unknown, unknown>, Error>' is not assignable to parameter of type 'SvelteStore<any> | null | undefined'.
+      Property 'subscribe' is missing in type 'InfiniteQueryObserverRefetchErrorResult<InfiniteData<unknown, unknown>, Error>' but required in type 'SvelteStore<any>'. (ts)
+                <span class="text-muted-foreground">Loading more...</span>
+            {:else if !$query.hasNextPage}
+                <span class="text-muted-foreground">No more todos</span>
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/login/+page.svelte:59:6
+Warn: Self-closing HTML tags for non-void elements are ambiguous — use `<span ...></span>` rather than `<span ... />`
+https://svelte.dev/e/element_invalid_self_closing_tag (svelte)
+				<div class="absolute inset-0 flex items-center">
+					<span class="w-full border-t" />
+				</div>
+
+/Users/mbex71/Documents/Research/my-svelte-app/src/routes/register/+page.svelte:65:6
+Warn: Self-closing HTML tags for non-void elements are ambiguous — use `<span ...></span>` rather than `<span ... />`
+https://svelte.dev/e/element_invalid_self_closing_tag (svelte)
+				<div class="absolute inset-0 flex items-center">
+					<span class="w-full border-t" />
+				</div>
+
+====================================
+svelte-check found 49 errors and 10 warnings in 8 files
+error: script "check" exited with code 1
