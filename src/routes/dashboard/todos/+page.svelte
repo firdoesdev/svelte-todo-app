@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createQuery, keepPreviousData } from '@tanstack/svelte-query';
 	import CreateTodoForm from '$lib/components/todo/create-todo-form.svelte';
+	import BulkCreateTodoForm from '$lib/components/todo/bulk-create-todo-form.svelte';
 	import TodoList from '$lib/components/todo/todo-list.svelte';
 	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button';
@@ -61,7 +62,10 @@
 			<h2 class="text-3xl font-bold tracking-tight">Your Todos</h2>
 			<p class="text-muted-foreground">Manage your tasks efficiently.</p>
 		</div>
-		<CreateTodoForm />
+		<div class="flex items-center gap-2">
+			<CreateTodoForm />
+			<BulkCreateTodoForm />
+		</div>
 	</div>
 
 	<div class="flex flex-col gap-4 sm:flex-row">
