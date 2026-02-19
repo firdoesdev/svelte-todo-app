@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    ports:
+      - "1234:3000"
+    volumes:
+      - .:/app
+    working_dir: /app
+  db:
+    image: postgres:17-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+networks:
+  todoapp:
+    driver: bridge
+volumes:
+  postgres_data:
+    driver: local
