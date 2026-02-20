@@ -3,9 +3,14 @@ services:
     build: .
     ports:
       - "1234:3000"
-    volumes:
-      - .:/app
-    working_dir: /app
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - todoapp
+
   db:
     image: postgres:17-alpine
     container_name: postgres
@@ -15,9 +20,18 @@ services:
       POSTGRES_DB: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - todoapp
+
 networks:
   todoapp:
     driver: bridge
+
 volumes:
   postgres_data:
     driver: local

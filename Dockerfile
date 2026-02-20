@@ -20,8 +20,8 @@ COPY src ./src
 COPY static ./static
 
 # Pass build-time env vars with ARG if needed (don't bake .env into the image)
-# ARG PUBLIC_SOME_VAR
-# ENV PUBLIC_SOME_VAR=$PUBLIC_SOME_VAR
+ARG DATABASE_URL="postgres://postgres:postgres@db/postgres"
+ENV DATABASE_URL=$DATABASE_URL
 
 RUN bun run build
 
