@@ -16,6 +16,7 @@
 	let search = $state(data.searchParams.search);
 	let status = $state(data.searchParams.status);
 	let sort = $state(data.searchParams.sort);
+	let order = $state(data.searchParams.order);
 	let page = $state(data.searchParams.page);
 
 	// Debounce search
@@ -27,6 +28,7 @@
 		if (debouncedSearch) params.set('search', debouncedSearch);
 		if (status !== 'all') params.set('status', status);
 		if (sort !== 'createdAt') params.set('sort', sort);
+		if (order !== 'desc') params.set('order', order);
 		if (page > 1) params.set('page', page.toString());
 
 		const query = params.toString();
@@ -44,12 +46,13 @@
 	});
 
 	const query = createQuery(() => ({
-		queryKey: ['todos', debouncedSearch, status, sort, page],
+		queryKey: ['todos', debouncedSearch, status, sort, order, page],
 		queryFn: async () => {
 			const params = new URLSearchParams({
 				search: debouncedSearch,
 				status,
 				sort,
+				order,
 				page: page.toString(),
 				limit: '5'
 			});
@@ -72,6 +75,13 @@
 			page--;
 			updateUrl();
 		}
+	}
+
+	function handleSortChange(field: string, newOrder: string) {
+		sort = field;
+		order = newOrder;
+		page = 1;
+		updateUrl();
 	}
 </script>
 
@@ -109,24 +119,6 @@
 				<SelectItem value="false">Incomplete</SelectItem>
 			</SelectContent>
 		</Select>
-
-		<Select
-			type="single"
-			bind:value={sort}
-			onValueChange={(v: string) => {
-				sort = v;
-				page = 1;
-				updateUrl();
-			}}
-		>
-			<SelectTrigger class="w-[140px]">
-				{sort === 'createdAt' ? 'Created Date' : 'Title'}
-			</SelectTrigger>
-			<SelectContent>
-				<SelectItem value="createdAt">Created Date</SelectItem>
-				<SelectItem value="title">Title</SelectItem>
-			</SelectContent>
-		</Select>
 	</div>
 
 	{#if query.isLoading}
@@ -134,7 +126,7 @@
 	{:else if query.isError}
 		<p class="text-destructive">Error: {query.error.message}</p>
 	{:else if query.data}
-		<TodoList todos={query.data.data} />
+		<TodoList todos={query.data.data} {sort} {order} onSortChange={handleSortChange} />
 
 		<div class="mt-4 flex items-center justify-between">
 			<p class="text-sm text-muted-foreground">
