@@ -2,8 +2,6 @@ services:
   app:
     build: .
     container_name: svelte-todo
-    ports:
-      - "1234:3000"
     env_file:
       - .env
     depends_on:
