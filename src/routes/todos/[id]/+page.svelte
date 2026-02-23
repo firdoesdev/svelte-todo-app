@@ -8,7 +8,7 @@
 
 <div class="flex flex-col gap-6 max-w-2xl mx-auto">
     <div class="flex items-center gap-4">
-        <Button variant="ghost" size="icon" href="/dashboard/todos">
+        <Button variant="ghost" size="icon" href="/todos">
             <ChevronLeft class="h-4 w-4" />
         </Button>
         <div>

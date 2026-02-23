@@ -29,13 +29,13 @@
 			<nav class="grid items-start px-4 text-sm font-medium">
 				<a
 					href="/dashboard"
-					class="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+					class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
 				>
 					Dashboard
 				</a>
 				<a
 					href="/todos"
-					class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+					class="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
 				>
 					Todos
 				</a>

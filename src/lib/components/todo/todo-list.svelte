@@ -2,6 +2,7 @@
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Button } from '$lib/components/ui/button';
 	import Trash from 'lucide-svelte/icons/trash';
+	import Pencil from 'lucide-svelte/icons/pencil';
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 	import { toast } from 'svelte-sonner';
 	import type { todo } from '$lib/server/db/schema';
@@ -83,10 +84,16 @@
 					<TableCell>{todo.description}</TableCell>
 					<TableCell>{todo.completed}</TableCell>
 					<TableCell>
-						<Button variant="ghost" size="icon" onclick={() => handleDelete(todo.id)}>
-							<Trash class="h-4 w-4" />
-							<span class="sr-only">Delete</span>
-						</Button>
+						<div class="flex gap-1">
+							<Button variant="ghost" size="icon" href={`/todos/edit/${todo.id}`}>
+								<Pencil class="h-4 w-4" />
+								<span class="sr-only">Edit</span>
+							</Button>
+							<Button variant="ghost" size="icon" onclick={() => handleDelete(todo.id)}>
+								<Trash class="h-4 w-4" />
+								<span class="sr-only">Delete</span>
+							</Button>
+						</div>
 					</TableCell>
 				</TableRow>
 			{/each}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createQuery, keepPreviousData } from '@tanstack/svelte-query';
+	import { goto } from '$app/navigation';
 	import CreateTodoForm from '$lib/components/todo/create-todo-form.svelte';
 	import BulkCreateTodoForm from '$lib/components/todo/bulk-create-todo-form.svelte';
 	import TodoList from '$lib/components/todo/todo-list.svelte';
@@ -9,20 +10,36 @@
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
 
-	let search = $state('');
-	let status = $state('all');
-	let sort = $state('createdAt');
-	let page = $state(1);
+	let { data } = $props();
+
+	// Initialize state from URL params (provided by +page.server.ts)
+	let search = $state(data.searchParams.search);
+	let status = $state(data.searchParams.status);
+	let sort = $state(data.searchParams.sort);
+	let page = $state(data.searchParams.page);
 
 	// Debounce search
-	let debouncedSearch = $state('');
+	let debouncedSearch = $state(data.searchParams.search);
 	let timer: ReturnType<typeof setTimeout>;
 
+	function updateUrl() {
+		const params = new URLSearchParams();
+		if (debouncedSearch) params.set('search', debouncedSearch);
+		if (status !== 'all') params.set('status', status);
+		if (sort !== 'createdAt') params.set('sort', sort);
+		if (page > 1) params.set('page', page.toString());
+
+		const query = params.toString();
+		goto(`/todos${query ? `?${query}` : ''}`, { replaceState: true, keepFocus: true, noScroll: true });
+	}
+
 	$effect(() => {
+		const currentSearch = search; // Read synchronously to track dependency
 		clearTimeout(timer);
 		timer = setTimeout(() => {
-			debouncedSearch = search;
+			debouncedSearch = currentSearch;
 			page = 1; // Reset page on search
+			updateUrl();
 		}, 500);
 	});
 
@@ -46,12 +63,14 @@
 	function handleNextPage() {
 		if (query.data?.meta.page < query.data?.meta.totalPages) {
 			page++;
+			updateUrl();
 		}
 	}
 
 	function handlePrevPage() {
 		if (page > 1) {
 			page--;
+			updateUrl();
 		}
 	}
 </script>
@@ -63,6 +82,7 @@
 			<p class="text-muted-foreground">Manage your tasks efficiently.</p>
 		</div>
 		<div class="flex items-center gap-2">
+			<Button href="/todos/create">Create Todo</Button>
 			<CreateTodoForm />
 			<BulkCreateTodoForm />
 		</div>
@@ -77,15 +97,16 @@
 			onValueChange={(v: string) => {
 				status = v;
 				page = 1;
+				updateUrl();
 			}}
 		>
 			<SelectTrigger class="w-[140px]">
-				{status === 'all' ? 'All' : status === 'active' ? 'Active' : 'Completed'}
+				{status === 'all' ? 'All' : status === 'true' ? 'Completed' : 'Incomplete'}
 			</SelectTrigger>
 			<SelectContent>
 				<SelectItem value="all">All</SelectItem>
-				<SelectItem value="active">Active</SelectItem>
-				<SelectItem value="completed">Completed</SelectItem>
+				<SelectItem value="true">Completed</SelectItem>
+				<SelectItem value="false">Incomplete</SelectItem>
 			</SelectContent>
 		</Select>
 
@@ -95,6 +116,7 @@
 			onValueChange={(v: string) => {
 				sort = v;
 				page = 1;
+				updateUrl();
 			}}
 		>
 			<SelectTrigger class="w-[140px]">
