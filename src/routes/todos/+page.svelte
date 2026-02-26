@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { createQuery, keepPreviousData } from '@tanstack/svelte-query';
 	import { goto } from '$app/navigation';
-	import CreateTodoForm from './_components/create-todo-form.svelte';
 	import BulkCreateTodoForm from './_components/bulk-create-todo-form.svelte';
 	import TodoList from './_components/todo-list.svelte';
 	import { Input } from '$lib/components/ui/input';
@@ -93,7 +92,6 @@
 		</div>
 		<div class="flex items-center gap-2">
 			<Button href="/todos/create">Create Todo</Button>
-			<CreateTodoForm />
 			<BulkCreateTodoForm />
 		</div>
 	</div>

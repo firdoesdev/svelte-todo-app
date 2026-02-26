@@ -1,5 +1,5 @@
 <script lang="ts">
-    import EditTodoForm from '$lib/components/todo/edit-todo-form.svelte';
+    import EditTodoForm from '../edit/[id]/_components/edit-todo-form/index.svelte';
     import { ChevronLeft } from 'lucide-svelte';
     import { Button } from '$lib/components/ui/button';
 

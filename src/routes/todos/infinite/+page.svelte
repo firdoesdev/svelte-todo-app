@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createInfiniteQuery } from '@tanstack/svelte-query';
-	import TodoList from '$lib/components/todo/todo-list.svelte';
+	import TodoList from '../_components/todo-list.svelte';
     import { onMount } from 'svelte';
 
 	const query = createInfiniteQuery(() => ({

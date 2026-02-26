@@ -2,32 +2,29 @@
 	import { createForm } from '@tanstack/svelte-form';
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 	import { zodValidator } from '@tanstack/zod-form-adapter';
-	import { editTodoFormSchema, type EditTodoFormSchema } from '$lib/schemas';
+	import { createTodoSchema, type CreateTodoSchema } from './schema';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
-	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
 
-	let { todo } = $props<{ todo: any }>();
 	const queryClient = useQueryClient();
 
 	const mutation = createMutation(() => ({
-		mutationFn: async (values: any) => {
-			const res = await fetch(`/api/todos/${todo.id}`, {
-				method: 'PATCH',
+		mutationFn: async (values: CreateTodoSchema) => {
+			const res = await fetch('/api/todos', {
+				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(values)
 			});
-			if (!res.ok) throw new Error('Failed to update todo');
+			if (!res.ok) throw new Error('Failed to create todo');
 			return res.json();
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['todos'] });
-			queryClient.invalidateQueries({ queryKey: ['todo', todo.id] });
-			toast.success('Todo updated');
-			goto('/dashboard/todos');
+			toast.success('Todo created successfully');
+			goto('/todos');
 		},
 		onError: (err) => {
 			toast.error(err.message);
@@ -36,13 +33,12 @@
 
 	const form = createForm(() => ({
 		defaultValues: {
-			title: todo.title,
-			description: todo.description || undefined,
-			completed: !!todo.completed
-		} as EditTodoFormSchema,
+			title: '',
+			description: undefined
+		} as CreateTodoSchema,
 		validatorAdapter: zodValidator(),
 		validators: {
-			onChange: editTodoFormSchema
+			onChange: createTodoSchema
 		},
 		onSubmit: async ({ value }) => {
 			mutation.mutate(value);
@@ -57,20 +53,22 @@
 		e.stopPropagation();
 		form.handleSubmit();
 	}}
-	class="flex max-w-md flex-col gap-4 rounded-lg border bg-card p-4 text-card-foreground shadow-sm"
+	class="flex flex-col gap-4 rounded-lg border bg-card p-6 text-card-foreground shadow-sm"
 >
-	<h3 class="leading-none font-semibold tracking-tight">Edit Todo</h3>
 	<div>
 		<form.Field name="title">
 			{#snippet children({ state, handleChange, handleBlur })}
-				<Label for="title">Title</Label>
-				<Input
-					id="title"
-					name="title"
-					value={state.value}
-					oninput={(e) => handleChange(e.currentTarget.value)}
-					onblur={handleBlur}
-				/>
+				<div class="grid gap-3">
+					<Label for="title">Title</Label>
+					<Input
+						id="title"
+						name="title"
+						value={state.value}
+						oninput={(e) => handleChange(e.currentTarget.value)}
+						onblur={handleBlur}
+						placeholder="Buy groceries"
+					/>
+				</div>
 				{#if state.meta.errors}
 					<p class="text-sm text-destructive">{state.meta.errors.join(', ')}</p>
 				{/if}
@@ -81,28 +79,16 @@
 	<div>
 		<form.Field name="description">
 			{#snippet children({ state, handleChange, handleBlur })}
-				<Label for="description">Description (Optional)</Label>
-				<Input
-					id="description"
-					name="description"
-					value={state.value || ''}
-					oninput={(e) => handleChange(e.currentTarget.value)}
-					onblur={handleBlur}
-				/>
-			{/snippet}
-		</form.Field>
-	</div>
-
-	<div>
-		<form.Field name="completed">
-			{#snippet children({ state, handleChange, handleBlur })}
-				<div class="flex items-center gap-2">
-					<Checkbox
-						id="completed"
-						checked={state.value}
-						onCheckedChange={(v) => handleChange(!!v)}
+				<div class="grid gap-3">
+					<Label for="description">Description (Optional)</Label>
+					<Input
+						id="description"
+						name="description"
+						value={state.value || ''}
+						oninput={(e) => handleChange(e.currentTarget.value)}
+						onblur={handleBlur}
+						placeholder="Optional details about your task"
 					/>
-					<Label for="completed">Completed</Label>
 				</div>
 			{/snippet}
 		</form.Field>
@@ -112,9 +98,9 @@
 		{#snippet children([canSubmit, isSubmitting])}
 			<div class="flex gap-2">
 				<Button type="submit" disabled={!canSubmit || isSubmitting}>
-					{isSubmitting ? 'Saving...' : 'Save Changes'}
+					{isSubmitting ? 'Creating...' : 'Create Todo'}
 				</Button>
-				<Button variant="outline" type="button" href="/dashboard/todos">Cancel</Button>
+				<Button variant="outline" type="button" href="/todos">Cancel</Button>
 			</div>
 		{/snippet}
 	</form.Subscribe>
