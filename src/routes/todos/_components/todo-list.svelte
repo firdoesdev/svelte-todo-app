@@ -18,8 +18,8 @@
 		TableRow
 	} from '$lib/components/ui/table';
 	import * as Dialog from '$lib/components/ui/dialog';
-	import Switch from '../ui/switch/switch.svelte';
-	import Label from '../ui/label/label.svelte';
+	import Switch from '$lib/components/ui/switch/switch.svelte';
+	import Label from '$lib/components/ui/label/label.svelte';
 
 	type Todo = typeof todo.$inferSelect;
 

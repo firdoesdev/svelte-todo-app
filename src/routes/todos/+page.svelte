@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { createQuery, keepPreviousData } from '@tanstack/svelte-query';
 	import { goto } from '$app/navigation';
-	import CreateTodoForm from '$lib/components/todo/create-todo-form.svelte';
-	import BulkCreateTodoForm from '$lib/components/todo/bulk-create-todo-form.svelte';
-	import TodoList from '$lib/components/todo/todo-list.svelte';
+	import CreateTodoForm from './_components/create-todo-form.svelte';
+	import BulkCreateTodoForm from './_components/bulk-create-todo-form.svelte';
+	import TodoList from './_components/todo-list.svelte';
 	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button';
 	import { Select, SelectContent, SelectItem, SelectTrigger } from '$lib/components/ui/select';
